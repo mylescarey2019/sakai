@@ -170,11 +170,13 @@ public class PASystemEntityProvider implements EntityProvider, AutoRegisterEntit
 
         if (timezoneFromUser != null) {
           if (checker.timezoneMismatch(timezoneFromUser)) {
+            log.warn("MRC.checkTimeZone - checker.timezoneMismatch: MISMATCH");  
             result.put("status", "MISMATCH");
             result.put("setTimezoneUrl", checker.getTimezoneToolUrlForUser());
             result.put("prefsTimezone", checker.formatTimezoneFromProfile());
             result.put("reportedTimezone", checker.formatReportedTimezone(timezoneFromUser));
           } else {
+            log.warn("MRC.checkTimeZone - checker.timezoneMismatch: OK");  
             result.put("status", "OK");
             result.put("setTimezoneUrl", checker.getTimezoneToolUrlForUser());
             result.put("prefsTimezone", checker.formatTimezoneFromProfile());
@@ -201,6 +203,7 @@ public class PASystemEntityProvider implements EntityProvider, AutoRegisterEntit
 
             // If there is no user (e.g. on the gateway site!) there's no timezone
             if(StringUtils.isEmpty(userid)) {
+                log.warn("MRC.TimezoneChecker - there no user on gateway");  
                 return null;
             }
 
