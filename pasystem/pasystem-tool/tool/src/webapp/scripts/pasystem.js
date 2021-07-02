@@ -222,6 +222,7 @@ PASystemTimezoneChecker.prototype.checkTimezone = function() {
   var self = this;
 
   if (self.isCheckRequired()) {
+    console.log('MRC-checking time zone...');
     $.ajax({
       url: '/direct/pasystem/checkTimeZone',
       data: {timezone: self.tz.name()},
@@ -229,10 +230,13 @@ PASystemTimezoneChecker.prototype.checkTimezone = function() {
       type: "GET",
       dataType: 'json',
       success: function(data) {
+        console.log(`MRC-back-from-check, status: ${data.status} tzUrl: ${data.setTimezoneUrl}`);
         if (data.status == 'MISMATCH' && data.setTimezoneUrl) {
+          console.log('MRC - need to add the banner');
           // Add banner for Timezone check message
           pasystem.banners.addBannerAlert("tz", self.getTimezoneBannerContent(data), true, "timezone");
         } else if (data.status == 'OK' && data.setTimezoneUrl) {
+          console.log('MRC - do not check for awhile - cookie write...');
           self.doNotCheckAgainForAWhile();
         }
       }
