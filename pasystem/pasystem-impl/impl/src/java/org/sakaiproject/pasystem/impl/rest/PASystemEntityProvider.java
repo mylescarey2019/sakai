@@ -162,7 +162,7 @@ public class PASystemEntityProvider implements EntityProvider, AutoRegisterEntit
         String timezoneFromUser = (String) params.get("timezone");
 
         if (timezoneFromUser != null) {
-            log.warn("MRC.checkTimeZone.timezoneFromUser: " + timezoneFromUser);
+            log.warn("MRC.checkTimeZone.timezoneFromUser:  " + timezoneFromUser);
         } else {
             log.warn("MRC.checkTimeZone.timezoneFromUser: timezoneFromUser is Null");
         }
